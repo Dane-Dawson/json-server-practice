@@ -11,7 +11,7 @@ Quick links
 - [What is a JSON Server?](#-json-server--json-server--)
 - [Making our database](#Build-that-database)
 - [What's in a database?](#What-did-I-just-do?)
-- [Running our server](#ITS-ALIVE!-Taking-our-server-live!)
+- [Running our server](#ITS-ALIVE-Taking-our-server-live)
 - [json-server interactions](#Interacting-with-our-new-DB)
 - [Database complete!](#Success)
 - [Port management](#Port-management)
