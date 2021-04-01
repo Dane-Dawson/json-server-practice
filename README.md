@@ -7,11 +7,11 @@ Resource used in writing this tutorial: Documentation from the creator themself 
 Quick links
 
 - [Install json-server](#Installing-json-server)
-- [See it in action!](#json-server-in-action)
+- [JSON server in action!](#json-server-in-action)
 - [What is a JSON Server?](#-json-server--json-server--)
-- [Making a database](#It's-database-time!)
-- [What's in a database?](#😅-What-did-I-just-do?-😅)
-- [Running our server](#⚡️⚡️-IT-LIVES-⚡️⚡️!-(Taking-our-server-live!))
+- [Making our database](#Build-that-database)
+- [What's in a database?](#What-did-I-just-do?)
+- [Running our server](#IT'S-ALIVE!-Taking-our-server-live!)
 - [json-server interactions](#Interacting-with-our-new-DB)
 - [Database complete!](#Success?)
 - [Port management](#Port-management)
@@ -125,7 +125,7 @@ Let's not talk about what we *could* do with it, and instead see what we *can* d
 
 ![let's do this](https://media2.giphy.com/media/BpGWitbFZflfSUYuZ9/200.gif)
 
-## It's database time!
+## Build that database
 
 Make a file called `db.json` on the same level as our `README.md`
 
@@ -157,7 +157,8 @@ To start let's add the below text into our `db.json`
 ```
 Make sure it's saved and there we go! We have a basic database all set up and ready! 
 
-## 😅 What did I just do? 😅
+## What did I just do?
+😅 ❓ 😅 ❓ 😅 ❓ 😅 ❓ 😅 
 
 Great question! 
 
@@ -180,7 +181,8 @@ Great question! Let's boot up our server and see what it can do!
 
 ---
 
-## ⚡️⚡️ IT LIVES ⚡️⚡️! (Taking our server live!)
+## IT'S ALIVE! Taking our server live!
+⚡️ Let's get this server 🔥 fired 🔥 up! ⚡️
 
 Make sure your terminal is currently in the the 📁root directory📁 of this repo (it should be named json-server-practice unless you named it differently) and type in 
 ```
