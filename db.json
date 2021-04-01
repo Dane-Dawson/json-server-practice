@@ -1,0 +1,19 @@
+{
+    "user": [
+      { "id": 1, 
+      "name": "Francis Felicity Franklin IV" },
+      { "id": 2, 
+      "name": "Greg" }
+    ],
+    "books": [
+      { "id": 1, 
+      "title": "Coding for Dummies", 
+      "userId": 1 },
+      { "id": 2, 
+      "title": "<Yoga class='for-programmers'/>", 
+      "userId": 1 },
+      { "id": 3, 
+      "title": "Dirk Gently's Holistic Detective Agency", 
+      "userId": 2 }
+    ]
+  }
