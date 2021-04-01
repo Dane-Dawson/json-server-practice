@@ -2,7 +2,7 @@
 
 Mini project to familiarize the use of `json-server`, and practice building a basic `db.json` server and some of it's advanced functionality!
 
-Resources used in writing this tutorial:
+Resource used in writing this tutorial:
 I am using https://github.com/typicode/json-server
 
 Quick links
@@ -14,6 +14,9 @@ Quick links
 - [Running our server](#⚡️⚡️-IT-LIVES-⚡️⚡️!-(Taking-our-server-live!))
 - [json-server interactions](#Interacting-with-our-new-DB)
 - [Database complete!](#Success?)
+- [Port management](#Port-management)
+- [Building object relationships](#Building-object-relationships)
+- [Nested data and custom routes](#Nested-data-and-custom-routes)
 
 ## ❓❔ JSON Server || json-server || ❔❓
 
@@ -91,7 +94,6 @@ Make sure it's saved and there we go! We have a basic database all set up and re
 Great question! 
 
 We built an object that has two keys, each of which points to an array. These keys are representing the class/model of each of our types of data, and any collection you want stored in your database will need it's own unique key. For example: 
-#### check naming convention here
 ```
 {
     "things":[],
@@ -99,7 +101,6 @@ We built an object that has two keys, each of which points to an array. These ke
     "singleThing":{}
 }
 ```
-
 Notice the naming convetion above.👆 
 If your key is pointing to an array (which means it's a collection; it's not *one* thing, it's an array of *many* things) that your name is pluralized. Also note you *can* store a single object instead of a collection, if your project calls for it.
 
@@ -167,7 +168,7 @@ That's it! We've built a simple `JSON` database that we can host to mock an exte
 
 ## Port management
 
-By default `json-server` runs on port 3000, but there is a couple of different ways to change that! The simplest is to just add a `-p <desired_port_number>` tag when you run the server! For example, if I wanted my server to run on 3001 instead of 3000, I would start my server with
+By default `json-server` runs on port 3000, but there is a couple of different ways to change that! The simplest is to just add a `--port <desired_port_number>` tag when you run the server! For example, if I wanted my server to run on 3001 instead of 3000, I would start my server with
 ```
 json-server --port 3001 --watch db.json
 ```
@@ -176,3 +177,92 @@ You can also call each of these options with shorthand, the above line runs synt
 json-server -p 3001 -w db.json
 ```
 
+There is another more permanent solution as well, which is to create a `json-server.json` file on the same level as your `db.json` file, and add the following code inside that file:
+```
+{
+    "port": 3001
+}
+```
+Replace `3001` with whatever port number you'd like, and run your server with:
+```
+json-server -w db.json
+```
+You *should* see it now automatically launching on it's newly designated port! Thanks to a recent update by the creator, the `json-server.json` is acting as a mini local configuration file and allows us to add a level of customization to our database.
+
+## Building object relationships
+
+Right now our database has the ability to see all of our `users`, all of our `books`, and any specific `book` or `user` object...but what if we wanted to see our user with the books that *they* own?
+
+If we boot up our server again and look at `http://localhost:3000/books`, we can see that each book has 3 keys.
+- `"id"` represents this books stored place in the database, it's an integer, and is unique to that book
+- `"title"` represents the title of the book, and it's a string
+- `"userId"` This is what we will be focusing on! This is what's called a `foreign key`, and is used to signify that this resource is connected to a different resource. One can think of it as a way for the database to say 
+> This book object belongs to a user with the id thats stored in this userId key
+
+We use the naming convention that is required of our library, and for `json-server` the foreign key is camelCase, hence our `user id` being stored as `userId`.
+
+## Nested data and custom routes
+
+Now that we have our data connected, how can we get our server to represent that with our fetches? The answer is custom routes! Let's make a file called `routes.json`, and go ahead and put this code in there:
+```
+{
+    "/users": "/users?_embed=books"
+}
+```
+
+What is going on here!? Let's tear it apart and figure out:
+-  It's a `JSON` file containing an object
+- The `key` of that object has a value of `"/users"`, which is one of our endpoints.
+- The `value` of that key is `"/users?_embed=books"`, which seems to be calling that same endpoint and also referencing our books resource.
+
+The `key`'s in this object are going to be where we designate the end point that we are customizing. We are telling `json-server` that when it goes to visit `/users`, instead of what it was *GOING* to show us, it will now show us something different.
+
+The `value` for that key represents what the custom route will do instead of it's default action. We are using a built in functionality of `json-server` (that parts of may be syntactically specific to `json-server`) to "include" models with this `GET` request. Here is the core structure for that key value pair:
+> "`/endpointParentResource` : "`/endpointParentResource`?_embed=`childResource`"
+notice that the `?_embed=` is an unchanging value, and that's what actually connects the two resources **AS LONG AS THE "CHILD" RESOURCE HAS THE PROPER FOREIGN KEY**. The books "belong" to the user, so we **have** to have that `userId` key on the book to connect them.
+
+In this context, we are telling the server 
+> When you hit the endpoint `/users`, instead of just showing me an array of users, look through the books and find the ones who's foreign key (`userId`) matches each users id. For all books that match, push them into an array and add them as a new key on this object.
+
+Let's see it in action! To run our `json-server` with routes we need to both call the option as we run the server, and tell it which file is holding those routes. If we've been coding along, now we can type
+```
+json-server --watch --routes routes.json db.json
+```
+This is identical to our previous server launch, we just added `--routes routes.json` to tell the server we want to include custom routes that we are storing in the `routes.json` file. If we go to visit our `http://localhost:3000/users` endpoint in the browser, we should see this beautiful array:
+```
+[
+  {
+    "id": 1,
+    "name": "Francis Felicity Franklin IV",
+    "age": 32,
+    "books": [
+      {
+        "id": 1,
+        "title": "Coding for Dummies",
+        "userId": 1
+      },
+      {
+        "id": 2,
+        "title": "<Yoga class=for-programmers/>",
+        "userId": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Greg",
+    "age": 38,
+    "books": [
+      {
+        "id": 3,
+        "title": "Dirk Gently's Holistic Detective Agency",
+        "userId": 2
+      }
+    ]
+  }
+]
+```
+
+🎉🎊🎉 **SUCCESS** 🎉🎊🎉
+
+This allows us to do a single fetch to get all of our Users, and included within that single fetch is also their associated Books! It's like *magic*.
