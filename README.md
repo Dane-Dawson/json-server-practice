@@ -18,6 +18,8 @@ Quick links
 - [Building object relationships](#Building-object-relationships)
 - [Nested data and custom routes](#Nested-data-and-custom-routes)
 
+---
+
 ## ❓❔ JSON Server || json-server || ❔❓
 
 First off, what is `json-server`? 
@@ -57,6 +59,8 @@ Once json-server is installed, let's build a database and get this party started
 
 ![We got this](https://media0.giphy.com/media/WrmAysy2Zb2Z2qhVkS/giphy.gif)
 
+---
+
 ## It's database time!
 
 Make a file called `db.json` on the same level as our `README.md`
@@ -93,7 +97,8 @@ Make sure it's saved and there we go! We have a basic database all set up and re
 
 Great question! 
 
-We built an object that has two keys, each of which points to an array. These keys are representing the class/model of each of our types of data, and any collection you want stored in your database will need it's own unique key. For example: 
+We built an object that has two keys 🔑, each of which points to an array. These keys are representing the class/model of each of our types of data, and any collection you want stored in your database will need it's own unique key. 
+For example: 
 ```
 {
     "things":[],
@@ -102,9 +107,14 @@ We built an object that has two keys, each of which points to an array. These ke
 }
 ```
 Notice the naming convetion above.👆 
-If your key is pointing to an array (which means it's a collection; it's not *one* thing, it's an array of *many* things) that your name is pluralized. Also note you *can* store a single object instead of a collection, if your project calls for it.
 
-Why go through all the hassel of all this work, when we could just copy that same object into our working file and save it as a variable? Great question!
+If your key is pointing to an array (which means it's a collection; it's not *one* thing👦, it's an array of *many* things👨‍👩‍👧‍👦) that your name is pluralized. Also note you *can* store a single object instead of a collection, if your project calls for it.
+
+🙋‍♂️❓🙋‍♂️
+>Why go through all the hassel of all this work, when we could just copy that same object into our working file and save it as a variable? 
+Great question! Let's boot up our server and see what it can do!
+
+---
 
 ## ⚡️⚡️ IT LIVES ⚡️⚡️! (Taking our server live!)
 
@@ -112,7 +122,7 @@ Make sure your terminal is currently in the the root directory of this repo (it 
 ```
 json-server --watch db.json
 ```
-This calls the json-server node module installed on your system, and runs the `--watch` command on the file `db.json`. If everything installed correctly and you typed the line correctly you should see your terminal do some thinking and then end on readout that looks surprisingly like this!
+This calls the json-server node module installed on your system, and runs the `--watch` command on the file `db.json`. If everything installed correctly and you typed the line correctly you should see your terminal do some thinking and then end on readout that looks surprisingly like this! 👇
 ```
 
   \{^_^}/ hi!
@@ -130,6 +140,8 @@ This calls the json-server node module installed on your system, and runs the `-
   Type s + enter at any time to create a snapshot of the database
   Watching...
 ```
+🔥🔥This means our `json-server` is running!🔥🔥
+
 By default the `json-server` launches on port 3000, which is accessible in your browser at `http://localhost:3000`. If you visit that location with chrome or your browser of choice now you should get a page that looks like this:
 ```
 Congrats!
@@ -143,13 +155,19 @@ To access and modify resources, you can use any HTTP method:
 
 GET POST PUT PATCH DELETE OPTIONS
 ```
-SUCCESS!! We are hosting a server! However, a server sitting by itself doesn't have a lot of practical purposes...let's figure out how we can connect this server to our code! 
+🏆SUCCESS!!🏆 
+
+We are hosting a server!
+
+![We got this](https://media4.giphy.com/media/3oz8xX7VouWzsKmt8I/giphy.gif)
+
+However, a server sitting by itself doesn't have a lot of practical purposes...let's figure out how we can connect this server to our code! 
 
 Note, you can exit your server at any time by hitting `ctrl+c` in your terminal.
 
 ## Interacting with our new DB
 
-If we look at the readout in our terminal, it shows that there are currently 2 "resources" stored in our database, a collection of users and a collection of books, and it tells us how many of each resource are currently saved. 
+If we look at the readout in our terminal, it shows that there are currently 2 "resources" stored in our database, a collection of users 👨‍👩‍👧‍👦 and a collection of books 📚, and it tells us how many of each resource are currently saved. 
 
 If we go to `http://localhost:3000/users` or `http://localhost:3000/books` in our browser we can see an array of that specific resource. Go ahead, try it! These would be the routes (often called endpoint) you usually want to target if you are performing a `GET` fetch request, as it will collect all examples of a resource stored at that endpoint and return them as an array.
 
@@ -165,6 +183,7 @@ That's it! We've built a simple `JSON` database that we can host to mock an exte
 
 #### I am going to come back here later maybe and write why we use APIs at all, but want to keep this focused on json-server.
 
+---
 
 ## Port management
 
@@ -266,3 +285,32 @@ This is identical to our previous server launch, we just added `--routes routes.
 🎉🎊🎉 **SUCCESS** 🎉🎊🎉
 
 This allows us to do a single fetch to get all of our Users, and included within that single fetch is also their associated Books! It's like *magic*.
+
+If we also wanted to see the collection of books when we viewed the individual user, we can set that up by adjusting our `routes.json` to the following:
+```
+{
+    "/users": "/users?_embed=books",
+    "/users/:id": "/users/:id?_embed=books"
+}
+```
+and if we relaunch our server (it has to be launched again to catch our changes) look at the `http://localhost:3001/users/1` endpoint in our browser we should see:
+```
+{
+  "id": 1,
+  "name": "Francis Felicity Franklin IV",
+  "age": 32,
+  "books": [
+    {
+      "id": 1,
+      "title": "Coding for Dummies",
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "<Yoga class=for-programmers/>",
+      "userId": 1
+    }
+  ]
+}
+```
+![unlimited power](https://media4.giphy.com/media/3o84sq21TxDH6PyYms/200.gif)
