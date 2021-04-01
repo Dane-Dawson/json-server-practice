@@ -7,7 +7,7 @@ I am using https://github.com/typicode/json-server
 
 Quick links
 
-- [What is a JSON Server?](#❓❔-JSON-Server-||-json-server-||-❔❓)
+- [What is a JSON Server?](#-json-server--json-server--)
 - [Install json-server](#Installing-json-server)
 - [Making a database](#It's-database-time!)
 - [What's in a database?](#😅-What-did-I-just-do?-😅)
