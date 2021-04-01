@@ -11,13 +11,13 @@ Quick links
 - [What is a JSON Server?](#-json-server--json-server--)
 - [Making our database](#Build-that-database)
 - [What's in a database?](#What-did-I-just-do?)
-- [Running our server](#IT'S-ALIVE!-Taking-our-server-live!)
+- [Running our server](#ITS-ALIVE!-Taking-our-server-live!)
 - [json-server interactions](#Interacting-with-our-new-DB)
-- [Database complete!](#Success?)
+- [Database complete!](#Success)
 - [Port management](#Port-management)
 - [Building object relationships](#Building-object-relationships)
 - [Nested data and custom routes](#Nested-data-and-custom-routes)
-- [What next?](#What-next?)
+- [What next?](#What-next)
 
 ---
 
