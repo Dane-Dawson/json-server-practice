@@ -1,16 +1,18 @@
 {
-    "user": [
+    "users": [
       { "id": 1, 
-      "name": "Francis Felicity Franklin IV" },
+      "name": "Francis Felicity Franklin IV",
+      "age" : 32 },
       { "id": 2, 
-      "name": "Greg" }
+      "name": "Greg",
+      "age" : 38 }
     ],
     "books": [
       { "id": 1, 
       "title": "Coding for Dummies", 
       "userId": 1 },
       { "id": 2, 
-      "title": "<Yoga class='for-programmers'/>", 
+      "title": "<Yoga class=for-programmers/>", 
       "userId": 1 },
       { "id": 3, 
       "title": "Dirk Gently's Holistic Detective Agency", 
