@@ -397,5 +397,20 @@ Then we can look at the `http://localhost:3001/users/1` endpoint in our browser 
 ```
 ![unlimited power](https://media4.giphy.com/media/3o84sq21TxDH6PyYms/200.gif)
 
+---
+
 ## What next?
 
+Now the world is your oyster (or whatever metaphor you prefer)! 
+
+The documentation covers other features that will give your database a more roboust feeling, including things like: 
+- Pagination! 📖, 📖, 📖, 📖, 📖
+- 👉Middleware👈
+- Using `json-server` as a ⚙⚙-`module`-⚙⚙
+- 💥✨🎈🎊 Other stuff! 🎊🎈✨💥 
+
+So journey forth and conquer! 
+
+With practice you could find `json-server` a useful tool throughout your programming career!
+
+![So it begins](https://media3.giphy.com/media/MfyWWx17ZdZAc/giphy.gif?cid=82a1493besphenwfj7nyfbr7d3a5otlyundqf7njlksdyv4z&rid=giphy.gif)
